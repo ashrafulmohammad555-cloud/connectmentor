@@ -82,7 +82,7 @@ pipeline {
                 dir('mentorconnect') {
                     sh '''#!/bin/bash
                         export PATH="/usr/local/bin:/opt/homebrew/bin:/opt/homebrew/sbin:$PATH"
-                        npm run build
+                        CI=false npm run build
                     '''
                 }
             }
