@@ -10,6 +10,7 @@ import {
   FaVideo,
   FaStar,
   FaRegStar,
+  FaClock,
 } from "react-icons/fa";
 import { supabase } from "../supabase";
 
@@ -123,6 +124,15 @@ function MentorDashboard() {
           >
             <FaChartLine className="text-6xl text-indigo-600 mx-auto mb-4" />
             <h2 className="text-xl font-semibold">Performance</h2>
+          </Link>
+
+          <Link
+            to="/mentor-availability"
+            className="bg-white p-8 rounded-xl shadow hover:shadow-2xl transition text-center border border-blue-100 group"
+          >
+            <FaClock className="text-6xl text-amber-500 mx-auto mb-4 group-hover:scale-110 transition-transform" />
+            <h2 className="text-xl font-semibold text-gray-800">Availability Slots</h2>
+            <p className="text-xs text-gray-500 mt-1">Configure weekly schedule</p>
           </Link>
 
           <Link

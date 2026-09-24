@@ -1,5 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { supabase } from "../supabase";
+import { generateGoogleCalendarUrl, downloadIcsFile } from "../utils/calendarSync";
+import { FaGoogle, FaDownload } from "react-icons/fa";
 
 function MyBookings() {
   const [bookings, setBookings] = useState([]);
@@ -219,12 +221,31 @@ function MyBookings() {
 
                   {/* MEETING INFO */}
                   {b.status === "accepted" && (
-                    <div className="mt-3 p-3 bg-green-50 rounded">
-                      <p className="text-green-700 font-semibold">
-                        Meeting Scheduled
+                    <div className="mt-3 p-3 bg-green-50 rounded-xl border border-green-200">
+                      <p className="text-green-700 font-semibold text-sm">
+                        Meeting Confirmed
                       </p>
-                      <p>📅 {b.date}</p>
-                      <p>⏰ {b.time}</p>
+                      <p className="text-xs text-gray-700 mt-1">📅 {b.date}</p>
+                      <p className="text-xs text-gray-700">⏰ {b.time}</p>
+
+                      {/* Calendar Sync Actions */}
+                      <div className="mt-3 pt-2 border-t border-green-200/60 flex flex-col sm:flex-row gap-2">
+                        <a
+                          href={generateGoogleCalendarUrl(b, b.mentor_email)}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="flex-1 py-1.5 px-2 bg-white border border-blue-300 text-blue-700 hover:bg-blue-50 text-xs font-semibold rounded-lg flex items-center justify-center gap-1.5 transition shadow-xs text-center"
+                        >
+                          <FaGoogle className="text-red-500 text-xs" /> Google Cal
+                        </a>
+                        <button
+                          type="button"
+                          onClick={() => downloadIcsFile(b, b.mentor_email)}
+                          className="flex-1 py-1.5 px-2 bg-white border border-gray-300 text-gray-700 hover:bg-gray-50 text-xs font-semibold rounded-lg flex items-center justify-center gap-1.5 transition shadow-xs"
+                        >
+                          <FaDownload className="text-gray-500 text-xs" /> .ICS Invite
+                        </button>
+                      </div>
                     </div>
                   )}
 

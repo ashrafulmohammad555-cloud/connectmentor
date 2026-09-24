@@ -17,6 +17,7 @@ function MentorNavbar() {
 
         {/* Desktop Menu */}
         <div className="hidden md:flex space-x-4">
+          <Link to="/mentor-availability" className="text-white hover:underline font-medium">Availability</Link>
           <Link to="/profile" className="text-white hover:underline">Profile</Link>
           <Link to="/messages" className="text-white hover:underline">Messages</Link>
           <Link to="/settings" className="text-white hover:underline">Settings</Link>
@@ -36,6 +37,7 @@ function MentorNavbar() {
 
       {/* Mobile Menu */}
       <div className={`md:hidden ${isOpen ? 'block' : 'hidden'} bg-blue-700 mt-2`}>
+        <Link to="/mentor-availability" className="block px-4 py-2 text-white hover:bg-blue-800 font-medium">Availability</Link>
         <Link to="/profile" className="block px-4 py-2 text-white hover:bg-blue-800">Profile</Link>
         <Link to="/messages" className="block px-4 py-2 text-white hover:bg-blue-800">Messages</Link>
         <Link to="/settings" className="block px-4 py-2 text-white hover:bg-blue-800">Settings</Link>

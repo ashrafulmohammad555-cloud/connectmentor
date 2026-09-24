@@ -1,6 +1,7 @@
-// src/pages/FlexibleScheduling.js
 import React, { useEffect, useState } from "react";
 import { supabase } from "../supabase";
+import { generateGoogleCalendarUrl, downloadIcsFile } from "../utils/calendarSync";
+import { FaGoogle, FaDownload } from "react-icons/fa";
 
 function FlexibleScheduling() {
   const [sessions, setSessions] = useState([]);
@@ -122,14 +123,33 @@ function FlexibleScheduling() {
                   <button
                     disabled={!isLive}
                     onClick={() => window.location.href = "/video-call"}
-                    className={`mt-4 w-full py-2 rounded ${
+                    className={`mt-4 w-full py-2 rounded font-semibold transition ${
                       isLive
-                        ? "bg-green-600 text-white hover:bg-green-700"
-                        : "bg-gray-300 text-gray-500 cursor-not-allowed"
+                        ? "bg-green-600 text-white hover:bg-green-700 shadow-md"
+                        : "bg-gray-200 text-gray-400 cursor-not-allowed"
                     }`}
                   >
-                    {isLive ? "Join Session" : "Not Started"}
+                    {isLive ? "Join Session Now" : "Session Scheduled"}
                   </button>
+
+                  {/* Calendar Sync */}
+                  <div className="mt-2.5 pt-2.5 border-t border-gray-100 flex gap-2">
+                    <a
+                      href={generateGoogleCalendarUrl(s, s.mentor_email)}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="flex-1 py-1 px-2 bg-blue-50 hover:bg-blue-100 text-blue-700 text-xs font-semibold rounded flex items-center justify-center gap-1 transition text-center"
+                    >
+                      <FaGoogle className="text-red-500 text-xs" /> Google Cal
+                    </a>
+                    <button
+                      type="button"
+                      onClick={() => downloadIcsFile(s, s.mentor_email)}
+                      className="flex-1 py-1 px-2 bg-gray-50 hover:bg-gray-100 text-gray-700 text-xs font-semibold rounded flex items-center justify-center gap-1 transition"
+                    >
+                      <FaDownload className="text-gray-500 text-xs" /> .ICS Invite
+                    </button>
+                  </div>
                 </div>
               );
             })}

@@ -1,5 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { supabase } from "../supabase";
+import { generateGoogleCalendarUrl, downloadIcsFile } from "../utils/calendarSync";
+import { FaGoogle, FaDownload, FaCheckCircle } from "react-icons/fa";
 
 function ReviewRequests() {
   const [bookings, setBookings] = useState([]);
@@ -138,6 +140,32 @@ function ReviewRequests() {
                 </button>
 
               </div>
+
+              {/* CALENDAR SYNC FOR ACCEPTED REQUESTS */}
+              {b.status === "accepted" && (
+                <div className="mt-3 p-3 bg-green-50 rounded-xl border border-green-200">
+                  <p className="text-xs font-semibold text-green-700 flex items-center gap-1.5">
+                    <FaCheckCircle /> Confirmed Meeting
+                  </p>
+                  <div className="mt-2 flex gap-2">
+                    <a
+                      href={generateGoogleCalendarUrl(b, b.mentee_email)}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="flex-1 py-1.5 px-2 bg-white border border-blue-300 text-blue-700 hover:bg-blue-50 text-xs font-semibold rounded-lg flex items-center justify-center gap-1 transition shadow-xs text-center"
+                    >
+                      <FaGoogle className="text-red-500 text-xs" /> Google Cal
+                    </a>
+                    <button
+                      type="button"
+                      onClick={() => downloadIcsFile(b, b.mentee_email)}
+                      className="flex-1 py-1.5 px-2 bg-white border border-gray-300 text-gray-700 hover:bg-gray-50 text-xs font-semibold rounded-lg flex items-center justify-center gap-1 transition shadow-xs"
+                    >
+                      <FaDownload className="text-gray-500 text-xs" /> .ICS
+                    </button>
+                  </div>
+                </div>
+              )}
 
               {/* DELETE */}
               <button

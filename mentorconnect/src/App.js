@@ -26,6 +26,7 @@ import ResourcesMaterials from './pages/ResourcesMaterials';  // Create/manage t
 import ReviewRequests from './pages/ReviewRequests';  // Create/manage this component
 
 import PerformanceDashboard from './pages/PerformanceDashboard';  // Create/manage this component
+import MentorAvailability from './pages/MentorAvailability';
 
 function App() {
   return (
@@ -59,6 +60,7 @@ function App() {
           <Route path="/review-requests" element={<ReviewRequests />} />  {/* Review Requests */}
           
           <Route path="/performance-dashboard" element={<PerformanceDashboard />} />  {/* Performance Dashboard */}
+          <Route path="/mentor-availability" element={<MentorAvailability />} />  {/* Mentor Availability */}
           <Route path="/video-call" element={<VideoCall />} />
           <Route path="/profile" element={<Profile />} />
 <Route path="/messages" element={<Messages />} />

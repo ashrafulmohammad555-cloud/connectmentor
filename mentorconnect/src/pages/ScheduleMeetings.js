@@ -1,5 +1,7 @@
 import React, { useEffect, useState } from 'react';
+import { Link } from 'react-router-dom';
 import { supabase } from '../supabase';
+import { FaClock } from 'react-icons/fa';
 
 function ScheduleMeetings() {
   const [bookings, setBookings] = useState([]);
@@ -80,11 +82,29 @@ function ScheduleMeetings() {
   return (
     <div className="min-h-screen bg-gray-100 p-6">
 
-      <h1 className="text-3xl font-bold text-center mb-6">
+      <h1 className="text-3xl font-bold text-center mb-4">
         Schedule Meetings
       </h1>
 
-      <div className="max-w-2xl mx-auto">
+      <div className="max-w-2xl mx-auto mb-6">
+        <Link
+          to="/mentor-availability"
+          className="p-4 bg-blue-50 border border-blue-200 rounded-xl flex items-center justify-between text-blue-800 hover:bg-blue-100 transition shadow-xs group"
+        >
+          <div className="flex items-center gap-3">
+            <div className="p-2.5 bg-blue-600 text-white rounded-lg group-hover:scale-105 transition-transform">
+              <FaClock />
+            </div>
+            <div>
+              <p className="font-semibold text-sm">Want recurring availability windows?</p>
+              <p className="text-xs text-blue-600">Configure your weekly slots so mentees can auto-book open times.</p>
+            </div>
+          </div>
+          <span className="text-xs font-bold text-blue-700 underline whitespace-nowrap">
+            Open Scheduler &rarr;
+          </span>
+        </Link>
+      </div>
 
         {/* SELECTED */}
         {selectedBooking && (
